@@ -1,11 +1,10 @@
 var linebot = require('linebot');
 var express = require('express');
-var getJSON = require('get-json');
 
 var bot = linebot({
-  channelId: 'channelId',
-  channelSecret: 'channelSecret',
-  channelAccessToken: 'channelAccessToken'
+  channelId: 1535120783,
+  channelSecret: "692b1839ca5426d61af3d4b038e81b68",
+  channelAccessToken: "NAq8fSKh+eKmAGR8iUqPmkLXAKI+mgjzi8pyCNyEktcxOfjfqCvlUQLzyLddcYsu3ql4eALNUt+ehby368gn1fjVGxuCTK1jRRIitof7Fc61rjepO662fZsvZpyZStfiU8RwSPIpEInUcvPEOFuZPwdB04t89/1O/w1cDnyilFU="
 });
 
 var timer;
