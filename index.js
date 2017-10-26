@@ -49,6 +49,7 @@ function _bot() {
 //weather
       if (msg.indexOf('天氣' != -1)) { 
         _getWeather();
+        totalstr = '';
          
       }
      
@@ -78,7 +79,7 @@ function _getJSON() {
 
 
 
-var totalstr=''
+var totalstr = '';
 
 
 function _getWeather() {
@@ -104,11 +105,8 @@ function _getWeather() {
       var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
       totalstr += str;
     }
-    replyMsg = '';
-    replyMsg = totalstr;
-    console.log('success',replyMsg);
   })
-
+  replyMsg = totalstr;
 }
 
 
