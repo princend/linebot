@@ -32,7 +32,7 @@ function _bot() {
       var msg = event.message.text;
       var replyMsg = '';
       //pm
-      if (msg.indexOf('PM2.5') != -1) {
+    /*   if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
             replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
@@ -44,7 +44,7 @@ function _bot() {
       }
       if (replyMsg == '') {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
-      }
+      } */
 //weather
       if (msg.indexOf('天氣' != -1)) { 
         request(url, function(err, res, body){
