@@ -82,7 +82,6 @@ function _getJSON() {
 
 var totalstr = '';
 
-
 function _getWeather() {
   request(url, function (err, res, body) {
     var $ = cheerio.load(body);
