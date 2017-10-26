@@ -104,11 +104,13 @@ function _getWeather() {
       var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
       totalstr += str;
     }
+    replyMsg = '';
     replyMsg = totalstr;
     console.log('success',replyMsg);
   })
 
 }
 
+_getWeather();
 
 
