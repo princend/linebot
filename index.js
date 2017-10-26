@@ -47,7 +47,7 @@ function _bot() {
       } */
 //weather
       if (msg.indexOf('天氣' != -1)) { 
-        request(url, function(err, res, body){
+        request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function(err, res, body){
           var $ = cheerio.load(body);
           var weather = []
           $('.FcstBoxTable01 tbody tr').each(function(i, elem){
@@ -68,7 +68,7 @@ function _bot() {
             var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
             replyMsg += str;
         }
-        
+        replyMsg=request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm')
         });
       }
 
@@ -100,7 +100,7 @@ function _getJSON() {
 
 
 
-/* request(url, function(err, res, body){
+  request(url, function(err, res, body){
   var $ = cheerio.load(body);
   var weather = []
   $('.FcstBoxTable01 tbody tr').each(function(i, elem){
@@ -122,5 +122,5 @@ function _getJSON() {
     var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain+';';
     totalstr += str;
 }
-console.log(totalstr)
-}); */
+   return totalstr;
+});  
