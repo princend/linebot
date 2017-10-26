@@ -71,7 +71,7 @@ function _bot() {
         replyMsg='in'
         });
       }
-     replyMsg='test'
+      replyMsg = msg;
 
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
