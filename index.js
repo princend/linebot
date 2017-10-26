@@ -14,7 +14,7 @@ var timer;
 var pm = [];
 _getJSON();
 var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
-
+var replyMsg = '';
 _bot();
 const app = express();
 const linebotParser = bot.parser();
@@ -30,7 +30,7 @@ function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
-      var replyMsg = '';
+    
       //pm
     /*   if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
@@ -47,34 +47,8 @@ function _bot() {
       } */
 //weather
       if (msg.indexOf('天氣' != -1)) { 
-        replyMsg='break1'
-        request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {
-          replyMsg='break2'
-          var $ = cheerio.load(body);
-          var weather = []
-          $('.FcstBoxTable01 tbody tr').each(function(i, elem){
-              weather.push($(this).text().split('\n'));
-          });
-          replyMsg='break3'
-          var output = [];
-          for(var i=0 ; i<3 ; i++){
-              output.push({
-                  time: weather[i][1].substring(2).split(' ')[0],
-                  temp: weather[i][2].substring(2),
-                  rain: weather[i][6].substring(2)
-              });
-          }
-          replyMsg='break4'
-          for(var i=0 ; i<output.length ; i++){
-            var time = output[i].time;
-            var temp = output[i].temp;
-            var rain = output[i].rain;
-            var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
-            replyMsg += str;
-          }
-          replyMsg='break5'
-          
-        });
+        replyMsg = totalstr;
+         
       }
      
       event.reply(replyMsg).then(function(data) {
@@ -88,6 +62,7 @@ function _bot() {
 }
 
 function _getJSON() {
+
   clearTimeout(timer);
   getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
     response.forEach(function(e, i) {
@@ -119,13 +94,15 @@ var totalstr=''
           rain: weather[i][6].substring(2)
       });
   }
-  var totalstr=''
+
   for(var i=0 ; i<output.length ; i++){
     var time = output[i].time;
     var temp = output[i].temp;
     var rain = output[i].rain;
     var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain+';';
     totalstr += str;
-}
-   return totalstr;
+  }
+  replyMsg = totalstr;
+
 });  
+
