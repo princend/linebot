@@ -71,6 +71,7 @@ function _bot() {
         replyMsg='in'
         });
       }
+     replyMsg='test'
 
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
@@ -97,7 +98,7 @@ function _getJSON() {
 
 
 
-
+var totalstr=''
 
 
   request(url, function(err, res, body){
