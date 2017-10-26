@@ -111,6 +111,6 @@ function _getWeather() {
 
 }
 
-_getWeather();
+
 
 
