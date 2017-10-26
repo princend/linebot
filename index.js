@@ -72,11 +72,11 @@ function _bot() {
             var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
             replyMsg += str;
           }
-          
+          replyMsg='break5'
           
         });
       }
-      replyMsg = 'no'
+     
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
       }).catch(function(error) {
