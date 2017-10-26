@@ -73,7 +73,7 @@ function _bot() {
             replyMsg += str;
           }
           
-          replyMsg = 'break5'
+          
         });
       }
       replyMsg = 'no'
