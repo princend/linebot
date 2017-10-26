@@ -16,6 +16,7 @@ _getJSON();
 var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
 var replyMsg = '';
 _bot();
+
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
@@ -47,7 +48,7 @@ function _bot() {
       } */
 //weather
       if (msg.indexOf('天氣' != -1)) { 
-        replyMsg = totalstr;
+        _getWeather();
          
       }
      
@@ -80,29 +81,34 @@ function _getJSON() {
 var totalstr=''
 
 
-  request(url, function(err, res, body){
-  var $ = cheerio.load(body);
-  var weather = []
-  $('.FcstBoxTable01 tbody tr').each(function(i, elem){
+function _getWeather() {
+  request(url, function (err, res, body) {
+    var $ = cheerio.load(body);
+    var weather = []
+    $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
       weather.push($(this).text().split('\n'));
-  });
-  var output = [];
-  for(var i=0 ; i<3 ; i++){
+    });
+    var output = [];
+    for (var i = 0; i < 3; i++) {
       output.push({
-          time: weather[i][1].substring(2).split(' ')[0],
-          temp: weather[i][2].substring(2),
-          rain: weather[i][6].substring(2)
+        time: weather[i][1].substring(2).split(' ')[0],
+        temp: weather[i][2].substring(2),
+        rain: weather[i][6].substring(2)
       });
-  }
+    }
 
-  for(var i=0 ; i<output.length ; i++){
-    var time = output[i].time;
-    var temp = output[i].temp;
-    var rain = output[i].rain;
-    var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain+';';
-    totalstr += str;
-  }
-  replyMsg = totalstr;
+    for (var i = 0; i < output.length; i++) {
+      var time = output[i].time;
+      var temp = output[i].temp;
+      var rain = output[i].rain;
+      var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
+      totalstr += str;
+    }
+    replyMsg = totalstr;
+    console.log('success',replyMsg);
+  })
 
-});  
+}
+
+
 
