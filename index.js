@@ -49,9 +49,9 @@ function _bot() {
       } */
 //weather
       if (msg.indexOf('天氣' != -1)) { 
-        _getWeather();
+    
+        replyMsg = totalstr;
         totalstr = '';
-         
       }
      
       event.reply(replyMsg).then(function(data) {
@@ -106,7 +106,7 @@ function _getWeather() {
       totalstr += str;
     }
   })
-  replyMsg = totalstr;
+  
 }
 
 
