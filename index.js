@@ -15,7 +15,7 @@ var pm = [];
 _getJSON();
 var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
 var replyMsg = '';
-_getWeather();
+
 _bot();
 
 const app = express();
