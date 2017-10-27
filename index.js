@@ -14,7 +14,7 @@ var timer;
 var pm = [];
 _getJSON();
 var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
-var replyMsg = '';
+
 
 _bot();
 
@@ -32,7 +32,7 @@ function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
-    
+      var replyMsg = '';
       //pm
     /*   if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
