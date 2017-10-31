@@ -46,7 +46,7 @@ function _bot() {
       if (msg.indexOf('Test') != -1) { 
         replyMsg = 'testin';
         var totalstr=''
-        request(url, function (err, res, body) {
+        request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {
         replyMsg = 'requstin';
         
           var $ = cheerio.load(body);
