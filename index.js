@@ -51,7 +51,7 @@ function _bot() {
       } */
 //weather
 
-      if (msg.indexOf('test' != -1)) { 
+      if (msg.indexOf('test') != -1) { 
 replyMsg='testin'
       }      
 /*       if (msg.indexOf('天氣' != -1)) { 
@@ -91,6 +91,35 @@ replyMsg='testin'
   });
 
 }
+
+/* function _bot() {
+  bot.on('message', function(event) {
+    if (event.message.type == 'text') {
+      var msg = event.message.text;
+      var replyMsg = '';
+      if (msg.indexOf('PM2.5') != -1) {
+        pm.forEach(function(e, i) {
+          if (msg.indexOf(e[0]) != -1) {
+            replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
+          }
+        });
+        if (replyMsg == '') {
+          replyMsg = '請輸入正確的地點';
+        }
+      }
+      if (replyMsg == '') {
+        replyMsg = '不知道「'+msg+'」是什麼意思 :p';
+      }
+
+      event.reply(replyMsg).then(function(data) {
+        console.log(replyMsg);
+      }).catch(function(error) {
+        console.log('error');
+      });
+    }
+  });
+
+} */
 
 /* function _getJSON() {
 
