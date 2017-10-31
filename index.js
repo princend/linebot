@@ -28,6 +28,8 @@ var server = app.listen(process.env.PORT || 8080, function() {
   console.log("App now running on port", port);
 });
 
+
+
 function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
@@ -52,7 +54,7 @@ function _bot() {
       if (msg.indexOf('test' != -1)) { 
 replyMsg='testin'
       }      
-      if (msg.indexOf('天氣' != -1)) { 
+/*       if (msg.indexOf('天氣' != -1)) { 
         request(url, function (err, res, body) {
           var $ = cheerio.load(body);
           var weather = []
@@ -78,7 +80,7 @@ replyMsg='testin'
             replyMsg = totalstr;
           }
         })
-      }
+      } */
      
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
