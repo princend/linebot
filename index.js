@@ -43,6 +43,9 @@ function _bot() {
       if (replyMsg == '') {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
       }
+      if (msg.indexOf('Test') != -1) { 
+        replyMsg = 'testin';
+      }
 
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
