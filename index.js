@@ -15,7 +15,7 @@ var pm = [];
 _getJSON();
 var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
 
-_getWeather()
+
 _bot();
 
 const app = express();
@@ -48,10 +48,36 @@ function _bot() {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
       } */
 //weather
+
+      if (msg.indexOf('test' != -1)) { 
+replyMsg='testin'
+      }      
       if (msg.indexOf('天氣' != -1)) { 
-    console.log('in')
-        replyMsg = totalstr;
-        totalstr = '';
+        request(url, function (err, res, body) {
+          var $ = cheerio.load(body);
+          var weather = []
+          let totalstr = '';
+          $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
+            weather.push($(this).text().split('\n'));
+          });
+          var output = [];
+          for (var i = 0; i < 3; i++) {
+            output.push({
+              time: weather[i][1].substring(2).split(' ')[0],
+              temp: weather[i][2].substring(2),
+              rain: weather[i][6].substring(2)
+            });
+          }
+      
+          for (var i = 0; i < output.length; i++) {
+            var time = output[i].time;
+            var temp = output[i].temp;
+            var rain = output[i].rain;
+            var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
+            totalstr += str;
+            replyMsg = totalstr;
+          }
+        })
       }
      
       event.reply(replyMsg).then(function(data) {
@@ -64,7 +90,7 @@ function _bot() {
 
 }
 
-function _getJSON() {
+/* function _getJSON() {
 
   clearTimeout(timer);
   getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
@@ -76,13 +102,13 @@ function _getJSON() {
     });
   });
   timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
-}
+} */
 
 
 
-var totalstr = '';
 
-function _getWeather() {
+
+/* function _getWeather() {
   request(url, function (err, res, body) {
     var $ = cheerio.load(body);
     var weather = []
@@ -107,7 +133,7 @@ function _getWeather() {
     }
   })
   
-}
+} */
 
 
 
