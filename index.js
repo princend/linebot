@@ -9,7 +9,7 @@ var bot = linebot({
   channelSecret: "692b1839ca5426d61af3d4b038e81b68",
   channelAccessToken: "NAq8fSKh+eKmAGR8iUqPmkLXAKI+mgjzi8pyCNyEktcxOfjfqCvlUQLzyLddcYsu3ql4eALNUt+ehby368gn1fjVGxuCTK1jRRIitof7Fc61rjepO662fZsvZpyZStfiU8RwSPIpEInUcvPEOFuZPwdB04t89/1O/w1cDnyilFU="
 });
-
+var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
 var timer;
 var pm = [];
 _getJSON();
