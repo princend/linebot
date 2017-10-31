@@ -43,7 +43,7 @@ function _bot() {
       if (replyMsg == '') {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
       }
-      if (msg.indexOf('Test') != -1) { 
+      if (msg.indexOf('天氣') != -1) { 
         replyMsg = 'testin';
         replyMsg =totalstr;
       }
