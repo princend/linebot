@@ -30,11 +30,11 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 
 
-function _bot() {
+/* function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
-      var replyMsg = '';
+      var replyMsg = ''; */
       //pm
     /*   if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function(e, i) {
@@ -51,9 +51,9 @@ function _bot() {
       } */
 //weather
 
-      if (msg.indexOf('test') != -1) { 
+/*       if (msg.indexOf('test') != -1) { 
 replyMsg='testin'
-      }      
+      }  */     
 /*       if (msg.indexOf('天氣' != -1)) { 
         request(url, function (err, res, body) {
           var $ = cheerio.load(body);
@@ -82,7 +82,7 @@ replyMsg='testin'
         })
       } */
      
-      event.reply(replyMsg).then(function(data) {
+/*       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
       }).catch(function(error) {
         console.log('error');
@@ -90,9 +90,9 @@ replyMsg='testin'
     }
   });
 
-}
+} */
 
-/* function _bot() {
+function _bot() {
   bot.on('message', function(event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
@@ -110,6 +110,9 @@ replyMsg='testin'
       if (replyMsg == '') {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
       }
+      if (msg.indexOf('test') != -1) { 
+        replyMsg = 'testin';
+              }
 
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
@@ -119,7 +122,7 @@ replyMsg='testin'
     }
   });
 
-} */
+} 
 
 /* function _getJSON() {
 
