@@ -68,9 +68,10 @@ function _bot() {
             var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
             totalstr += str;
           }
-          replyMsg = totalstr;
-          totalstr = '';
+
         })
+        replyMsg = totalstr;
+        totalstr = '';
       }
 
       event.reply(replyMsg).then(function(data) {
