@@ -49,7 +49,7 @@ function _bot() {
       } */
 //weather
       if (msg.indexOf('天氣' != -1)) { 
-    
+    console.log('in')
         replyMsg = totalstr;
         totalstr = '';
       }
