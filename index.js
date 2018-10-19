@@ -95,7 +95,7 @@ function _getJSON() {
 
 function getNewData(){
   clearTimeout(timer);
-  timer = setInterval(_getJSON(), 1800000); //每半小時抓取一次新資料
+  timer = setInterval(()=>{_getJSON()}, 3600000); //每半小時抓取一次新資料
 }
 /* function _getJSON() {
 
