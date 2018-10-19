@@ -48,19 +48,23 @@ function _bot() {
         getWeather();
         // replyMsg = totalstr;
       }
-      event.reply(replyMsg).then(function (data) {
-        if (msg.indexOf('天氣') != -1) {
-          setTimeout(() => {
-            replyMsg = totalstr;
+
+      setTimeout(() => {
+        event.reply(replyMsg).then(function (data) {
+          if (msg.indexOf('天氣') != -1) {
+            setTimeout(() => {
+              replyMsg = totalstr;
+              console.log(replyMsg);
+            }, 1000);
+          }
+          else {
             console.log(replyMsg);
-          }, 1000);
-        }
-        else {
-          console.log(replyMsg);
-        }
-      }).catch(function (error) {
-        console.log('error');
-      });
+          }
+        }).catch(function (error) {
+          console.log('error');
+        });
+      }, 1000);
+
     }
   });
 }
