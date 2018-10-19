@@ -52,10 +52,8 @@ function _bot() {
       setTimeout(() => {
         event.reply(replyMsg).then(function (data) {
           if (msg.indexOf('天氣') != -1) {
-            setTimeout(() => {
-              replyMsg = totalstr;
-              console.log(replyMsg);
-            }, 1000);
+            replyMsg = totalstr;
+            console.log(replyMsg);
           }
           else {
             console.log(replyMsg);
