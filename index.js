@@ -45,7 +45,7 @@ function _bot() {
       }
       if (msg.indexOf('天氣') != -1) { 
         replyMsg = 'testin';
-        replyMsg =totalstr;
+        replyMsg =_getJSON();
       }
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
@@ -58,19 +58,9 @@ function _bot() {
 }
 
 function _getJSON() {
-  clearTimeout(timer);
-/*   getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
-    response.forEach(function(e, i) {
-      pm[i] = [];
-      pm[i][0] = e.SiteName;
-      pm[i][1] = e['PM2.5'] * 1;
-      pm[i][2] = e.PM10 * 1;
-    });
-  }); */
   request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {    
       var $ = cheerio.load(body);
       var weather = []
-    
       totalstr = '';
       $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
         weather.push($(this).text().split('\n'));
@@ -91,11 +81,9 @@ function _getJSON() {
         var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
         totalstr += str;
       }
-
+      return totalstr;
     })
-
-
-  timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
+  // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
 }
 
 /* function _getJSON() {
