@@ -51,7 +51,7 @@ function _bot() {
 
       setTimeout(() => {
         event.reply(replyMsg).then(function (data) {
-          if (msg.indexOf('天氣') != -1) {
+          if (event.message.text.indexOf('天氣') != -1) {
             replyMsg = totalstr;
             console.log(replyMsg);
           }
