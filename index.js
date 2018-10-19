@@ -45,7 +45,7 @@ function _bot() {
       }
       if (msg.indexOf('天氣') != -1) {
 
-        this.getWeather();
+        getWeather();
         // replyMsg = totalstr;
       }
       event.reply(replyMsg).then(function (data) {
