@@ -13,6 +13,7 @@ var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
 var timer;
 var pm = [];
 _getJSON();
+getNewData();
 var totalstr=''
 _bot();
 const app = express();
@@ -58,15 +59,7 @@ function _bot() {
 }
 
 function _getJSON() {
-  clearTimeout(timer);
-/*   getJSON('http://opendata2.epa.gov.tw/AQX.json', function(error, response) {
-    response.forEach(function(e, i) {
-      pm[i] = [];
-      pm[i][0] = e.SiteName;
-      pm[i][1] = e['PM2.5'] * 1;
-      pm[i][2] = e.PM10 * 1;
-    });
-  }); */
+  
   request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {    
       var $ = cheerio.load(body);
       var weather = []
@@ -95,9 +88,15 @@ function _getJSON() {
     })
 
 
-  timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
+ 
 }
 
+
+
+function getNewData(){
+  clearTimeout(timer);
+  timer = setInterval(_getJSON(), 1800000); //每半小時抓取一次新資料
+}
 /* function _getJSON() {
 
   clearTimeout(timer);
