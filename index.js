@@ -40,9 +40,9 @@ function _bot() {
           replyMsg = '請輸入正確的地點';
         }
       }
-      if (replyMsg == '') {
-        replyMsg = '不知道「' + msg + '」是什麼意思 :p';
-      }
+      // if (replyMsg == '') {
+      //   replyMsg = '不知道「' + msg + '」是什麼意思 :p';
+      // }
       if (msg.indexOf('天氣') != -1) {
 
         getWeather();
