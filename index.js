@@ -14,6 +14,7 @@ var timer;
 var pm = [];
 // _getJSON();
 var totalstr = ''
+var inputText=''
 _bot();
 const app = express();
 const linebotParser = bot.parser();
@@ -29,6 +30,7 @@ function _bot() {
   bot.on('message', function (event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
+      inputText=event.message.text;
       var replyMsg = '';
       if (msg.indexOf('PM2.5') != -1) {
         pm.forEach(function (e, i) {
@@ -51,7 +53,7 @@ function _bot() {
 
       setTimeout(() => {
         event.reply(replyMsg).then(function (data) {
-          if (event.message.text.indexOf('天氣') != -1) {
+          if (inputText.indexOf('天氣') != -1) {
             console.log('in');
             replyMsg = totalstr;
             console.log(replyMsg);
