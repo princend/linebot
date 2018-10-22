@@ -61,7 +61,12 @@ function _bot() {
         type: 'image',
         originalContentUrl: 'https://example.com/original.jpg',
         previewImageUrl: 'https://example.com/preview.jpg'
-      });
+      }).then((data)=>{
+
+console.log(data);
+
+
+      }).catch();
     }
   });
 
