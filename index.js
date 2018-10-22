@@ -12,120 +12,117 @@ var bot = linebot({
 var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
 var timer;
 var pm = [];
-_getJSON();
-getNewData();
-var totalstr=''
+_getWeather();
+// getNewData();
+var totalstr = ''
 _bot();
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
 
 //因為 express 預設走 port 3000，而 heroku 上預設卻不是，要透過下列程式轉換
-var server = app.listen(process.env.PORT || 8080, function() {
+var server = app.listen(process.env.PORT || 8080, function () {
   var port = server.address().port;
   console.log("App now running on port", port);
 });
 
 function _bot() {
-  bot.on('message', function(event) {
+  bot.on('message', function (event) {
     if (event.message.type == 'text') {
       var msg = event.message.text;
       var replyMsg = '';
       if (msg.indexOf('PM2.5') != -1) {
-        pm.forEach(function(e, i) {
-          if (msg.indexOf(e[0]) != -1) {
-            replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
-            event.reply(replyMsg).then(function(data) {
+        _getPM()
+        setTimeout(() => {
+          pm.forEach(function (e, i) {
+            if (msg.indexOf(e[0]) != -1) {
+              replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
+              event.reply(replyMsg).then(function (data) {
+                console.log(replyMsg);
+              }).catch(function (error) {
+                console.log('error');
+              });
+            }
+          });
+          if (replyMsg == '') {
+            replyMsg = '請輸入正確的地點';
+            event.reply(replyMsg).then(function (data) {
               console.log(replyMsg);
-            }).catch(function(error) {
+            }).catch(function (error) {
               console.log('error');
             });
           }
-        });
-        if (replyMsg == '') {
-          replyMsg = '請輸入正確的地點';
-          event.reply(replyMsg).then(function(data) {
-            console.log(replyMsg);
-          }).catch(function(error) {
-            console.log('error');
-          });
-        }
+        }, 1000);
+
+
       }
-/*       if (replyMsg == '') {
-        replyMsg = '不知道「'+msg+'」是什麼意思 :p';
-        event.reply(replyMsg).then(function(data) {
-          console.log(replyMsg);
-        }).catch(function(error) {
-          console.log('error');
-        });
-      } */
-      if (msg.indexOf('天氣') != -1) { 
+      if (msg.indexOf('天氣') != -1) {
         replyMsg = 'testin';
-        _getJSON()
+        _getWeather()
         setTimeout(() => {
-          replyMsg =totalstr;  
-          event.reply(replyMsg).then(function(data) {
+          replyMsg = totalstr;
+          event.reply(replyMsg).then(function (data) {
             console.log(replyMsg);
-          }).catch(function(error) {
+          }).catch(function (error) {
             console.log('error');
           });
         }, 1000);
-        
       }
-
-    
-
-
-
-/*       event.reply({
-        type: 'image',
-        originalContentUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg',
-        previewImageUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg'
-      }).then((data)=>{}); */
+      /*       event.reply({
+              type: 'image',
+              originalContentUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg',
+              previewImageUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg'
+            }).then((data)=>{}); */
     }
   });
 
 }
 
-function _getJSON() {
-  
-  request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {    
-      var $ = cheerio.load(body);
-      var weather = []
-    
-      totalstr = '';
-      $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
-        weather.push($(this).text().split('\n'));
+function _getWeather() {
+  request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {
+    var $ = cheerio.load(body);
+    var weather = []
+    totalstr = '';
+    $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
+      weather.push($(this).text().split('\n'));
+    });
+    var output = [];
+    for (var i = 0; i < 3; i++) {
+      output.push({
+        time: weather[i][1].substring(2).split(' ')[0],
+        temp: weather[i][2].substring(2),
+        rain: weather[i][6].substring(2)
       });
-      var output = [];
-      for (var i = 0; i < 3; i++) {
-        output.push({
-          time: weather[i][1].substring(2).split(' ')[0],
-          temp: weather[i][2].substring(2),
-          rain: weather[i][6].substring(2)
-        });
-      }
-  
-      for (var i = 0; i < output.length; i++) {
-        var time = output[i].time;
-        var temp = output[i].temp;
-        var rain = output[i].rain;
-        var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
-        totalstr += str;
-      }
-
-    })
-
-
- 
+    }
+    for (var i = 0; i < output.length; i++) {
+      var time = output[i].time;
+      var temp = output[i].temp;
+      var rain = output[i].rain;
+      var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
+      totalstr += str;
+    }
+  })
 }
 
 
 
-function getNewData(){
+function _getPM() {
+  getJSON('http://opendata2.epa.gov.tw/AQX.json', function (error, response) {
+    response.forEach(function (e, i) {
+      pm[i] = [];
+      pm[i][0] = e.SiteName;
+      pm[i][1] = e['PM2.5'] * 1;
+      pm[i][2] = e.PM10 * 1;
+    });
+  });
+}
+
+
+
+/* function getNewData(){
   clearTimeout(timer);
   timer = setInterval(()=>{_getJSON()}, 3600000); //每半小時抓取一次新資料
-}
+} */
 /* function _getJSON() {
 
   clearTimeout(timer);
