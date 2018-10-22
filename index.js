@@ -35,38 +35,53 @@ function _bot() {
         pm.forEach(function(e, i) {
           if (msg.indexOf(e[0]) != -1) {
             replyMsg = e[0] + '的 PM2.5 數值為 ' + e[1];
+            event.reply(replyMsg).then(function(data) {
+              console.log(replyMsg);
+            }).catch(function(error) {
+              console.log('error');
+            });
           }
         });
         if (replyMsg == '') {
           replyMsg = '請輸入正確的地點';
+          event.reply(replyMsg).then(function(data) {
+            console.log(replyMsg);
+          }).catch(function(error) {
+            console.log('error');
+          });
         }
       }
       if (replyMsg == '') {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
+        event.reply(replyMsg).then(function(data) {
+          console.log(replyMsg);
+        }).catch(function(error) {
+          console.log('error');
+        });
       }
       if (msg.indexOf('天氣') != -1) { 
         replyMsg = 'testin';
-        replyMsg =totalstr;
+        _getJSON()
+        setTimeout(() => {
+          replyMsg =totalstr;  
+          event.reply(replyMsg).then(function(data) {
+            console.log(replyMsg);
+          }).catch(function(error) {
+            console.log('error');
+          });
+        }, 1000);
+        
       }
 
-      console.log(event,'事件')
-      event.reply(replyMsg).then(function(data) {
-        console.log(replyMsg);
-      }).catch(function(error) {
-        console.log('error');
-      });
+    
 
 
-      event.reply({
+
+/*       event.reply({
         type: 'image',
         originalContentUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg',
         previewImageUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg'
-      }).then((data)=>{
-
-console.log(data);
-
-
-      }).catch();
+      }).then((data)=>{}); */
     }
   });
 
