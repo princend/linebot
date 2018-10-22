@@ -51,14 +51,14 @@ function _bot() {
           });
         }
       }
-      if (replyMsg == '') {
+/*       if (replyMsg == '') {
         replyMsg = '不知道「'+msg+'」是什麼意思 :p';
         event.reply(replyMsg).then(function(data) {
           console.log(replyMsg);
         }).catch(function(error) {
           console.log('error');
         });
-      }
+      } */
       if (msg.indexOf('天氣') != -1) { 
         replyMsg = 'testin';
         _getJSON()
