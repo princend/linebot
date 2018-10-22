@@ -59,8 +59,8 @@ function _bot() {
 
       event.reply({
         type: 'image',
-        originalContentUrl: 'https://example.com/original.jpg',
-        previewImageUrl: 'https://example.com/preview.jpg'
+        originalContentUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg',
+        previewImageUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg'
       }).then((data)=>{
 
 console.log(data);
