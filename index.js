@@ -48,10 +48,19 @@ function _bot() {
         replyMsg = 'testin';
         replyMsg =totalstr;
       }
+
+      console.log(event,'事件')
       event.reply(replyMsg).then(function(data) {
         console.log(replyMsg);
       }).catch(function(error) {
         console.log('error');
+      });
+
+
+      event.reply({
+        type: 'image',
+        originalContentUrl: 'https://example.com/original.jpg',
+        previewImageUrl: 'https://example.com/preview.jpg'
       });
     }
   });
