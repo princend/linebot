@@ -111,6 +111,12 @@ function _getWeather() {
       var str = time + '，溫度大約' + temp + '度，降雨機率 ' + rain + ';';
       totalstr += str;
     }
+    sendOptions.json.messages = []
+    let sendObj = {
+      "type": "text",
+      "text": totalstr
+    }
+    sendOptions.json.messages.push(sendObj)
   })
 }
 
@@ -140,8 +146,13 @@ getFGOimg();
 function getFGOimg() {
   request(options, function (err, res, body) {
     getImgs(body);
-    sendOptions.json.messages[0].originalContentUrl = photo;
-    sendOptions.json.messages[0].previewImageUrl = photo;
+    sendOptions.json.messages = []
+    let sendObj = {
+      "type": "image",
+      "originalContentUrl": photo,
+      "previewImageUrl": photo
+    }
+    sendOptions.json.messages.push(sendObj)
   })
 }
 
@@ -245,5 +256,17 @@ function timer() {
         autoSendMsg();
       }
     }
+    if (date.substring(0, 7) === "07:10:0") {
+      if (Number(date.substring(7, 8) <= 4)) {
+        autoSendWeatherMsg()
+      }
+    }
   }, 5000)
+}
+
+function autoSendWeatherMsg() {
+  _getWeather();
+  setTimeout(() => {
+    request.post(sendOptions, (err) => { console.log('res', err); })
+  }, 1000)
 }
