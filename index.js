@@ -81,22 +81,23 @@ function _bot() {
           }).then((data) => { });
         }, 1000);
       }
+      if (msg.indexOf('抽卡機開啟') != -1) {
+        setInterval(()=>{
+          getFGOimg()
+          setTimeout(() => {
+            event.reply({
+              type: 'image',
+              originalContentUrl: photo,
+              previewImageUrl: photo
+            }).then((data) => { });
+          }, 1000);
+        },5000)
+
+      }
     }
   });
 
 }
-
-botTest()
-function botTest() {
-  bot.on('follow', function (event) { event.reply('follow').then() });
-  bot.on('unfollow', function (event) { event.reply('unfollow').then() });
-  bot.on('join', function (event) { event.reply('join').then() });
-  bot.on('leave', function (event) { event.reply('leave').then() });
-  bot.on('postback', function (event) { event.reply('postback').then() });
-  bot.on('beacon', function (event) { event.reply('beacon').then() });
-}
-
-
 
 
 function _getWeather() {
