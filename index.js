@@ -83,17 +83,7 @@ function _bot() {
           }).then((data) => { });
         }, 1000);
       }
-      setInterval(()=>{
-        getFGOimg()
-        setTimeout(() => {
-          // replyMsg = totalstr;
-          event.reply({
-            type: 'image',
-            originalContentUrl: photo,
-            previewImageUrl: photo
-          }).then((data) => { });
-        }, 1000);
-      },10000)
+    
 
       /*       event.reply({
               type: 'image',
@@ -104,6 +94,24 @@ function _bot() {
   });
 
 }
+
+
+bot.on('follow',   function (event) { 
+  setInterval(()=>{
+    console.log(123);
+  getFGOimg()
+  setTimeout(() => {
+    // replyMsg = totalstr;
+    event.reply({
+      type: 'image',
+      originalContentUrl: photo,
+      previewImageUrl: photo
+    }).then((data) => { });
+  }, 1000);
+},5000)
+});
+
+
 
 function _getWeather() {
   request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {
