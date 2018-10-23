@@ -83,6 +83,18 @@ function _bot() {
           }).then((data) => { });
         }, 1000);
       }
+      setInterval(()=>{
+        getFGOimg()
+        setTimeout(() => {
+          // replyMsg = totalstr;
+          event.reply({
+            type: 'image',
+            originalContentUrl: photo,
+            previewImageUrl: photo
+          }).then((data) => { });
+        }, 1000);
+      },10000)
+
       /*       event.reply({
               type: 'image',
               originalContentUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg',
