@@ -159,6 +159,9 @@ function getImgs(param) {
 function getRandom(x) {
   return Math.floor(Math.random() * x);
 };
+
+
+
 /* function getNewData(){
   clearTimeout(timer);
   timer = setInterval(()=>{_getJSON()}, 3600000); //每半小時抓取一次新資料
@@ -210,4 +213,31 @@ function getRandom(x) {
 
 
 
+var sendOptions = {
+  url: 'https://api.line.me/v2/bot/message/push',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {NAq8fSKh+eKmAGR8iUqPmkLXAKI+mgjzi8pyCNyEktcxOfjfqCvlUQLzyLddcYsu3ql4eALNUt+ehby368gn1fjVGxuCTK1jRRIitof7Fc61rjepO662fZsvZpyZStfiU8RwSPIpEInUcvPEOFuZPwdB04t89/1O/w1cDnyilFU=}'
+  },
+  body:{
+      "to": "U88cd28005c1e4c187bd8bb50a4532bde",
+      "messages":[
+          {
+              "type":"text",
+              "text":"Hello, world1"
+          },
+          {
+              "type":"text",
+              "text":"Hello, world2"
+          }
+      ]
+  }
+};
 
+
+autoSendMsg();
+function autoSendMsg() {
+  request(sendOptions, function (err, res, body) {
+  })
+
+}
