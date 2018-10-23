@@ -12,6 +12,9 @@ var bot = linebot({
 var url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm';
 var timer;
 var pm = [];
+
+var fgoImgAlbumURL = 'https://api.imgur.com/3/album/b3ylv/images'
+
 _getWeather();
 // getNewData();
 var totalstr = ''
@@ -68,6 +71,18 @@ function _bot() {
           });
         }, 1000);
       }
+      if (msg.indexOf('抽') != -1) {
+
+        getFGOimg()
+        setTimeout(() => {
+          // replyMsg = totalstr;
+          event.reply({
+            type: 'image',
+            originalContentUrl: photo,
+            previewImageUrl: photo
+          }).then((data) => { });
+        }, 1000);
+      }
       /*       event.reply({
               type: 'image',
               originalContentUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg',
@@ -105,7 +120,6 @@ function _getWeather() {
 }
 
 
-
 function _getPM() {
   getJSON('http://opendata2.epa.gov.tw/AQX.json', function (error, response) {
     response.forEach(function (e, i) {
@@ -118,7 +132,38 @@ function _getPM() {
 }
 
 
+var options = {
+  url: fgoImgAlbumURL,
+  headers: {
+    'Authorization': 'Client-ID 757aa7465befd6c'
+  }
+};
 
+
+getFGOimg();
+
+function getFGOimg() {
+  request(options, function (err, res, body) {
+    getImgs(body)
+  })
+}
+
+var imgArray = []
+var photo = ''
+function getImgs(param) {
+  param = JSON.parse(param);
+  imgArray = []
+  param.data.forEach(element => {
+    imgArray.push(element.link);
+  });
+  var ra = getRandom(imgArray.length)
+  photo = imgArray[ra]
+}
+
+
+function getRandom(x) {
+  return Math.floor(Math.random() * x);
+};
 /* function getNewData(){
   clearTimeout(timer);
   timer = setInterval(()=>{_getJSON()}, 3600000); //每半小時抓取一次新資料
