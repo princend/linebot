@@ -71,7 +71,7 @@ function _bot() {
           });
         }, 1000);
       }
-      if (msg.indexOf('抽') != -1&&msg!=='抽卡機開啟') {
+      if (msg.indexOf('抽') != -1) {
         getFGOimg()
         setTimeout(() => {
           event.reply({
@@ -81,19 +81,7 @@ function _bot() {
           }).then((data) => { });
         }, 1000);
       }
-      if (msg.indexOf('抽卡機開啟') != -1) {
-        setInterval(()=>{
-          getFGOimg()
-          setTimeout(() => {
-            event.reply({
-              type: 'image',
-              originalContentUrl: photo,
-              previewImageUrl: photo
-            }).then((data) => { });
-          }, 1000);
-        },5000)
 
-      }
     }
   });
 
