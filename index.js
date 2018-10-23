@@ -71,7 +71,7 @@ function _bot() {
           });
         }, 1000);
       }
-      if (msg.indexOf('抽') != -1) {
+      if (msg.indexOf('抽') != -1&&msg!=='抽卡機開啟') {
         getFGOimg()
         setTimeout(() => {
           event.reply({
