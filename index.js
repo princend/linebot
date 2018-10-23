@@ -72,10 +72,8 @@ function _bot() {
         }, 1000);
       }
       if (msg.indexOf('抽') != -1) {
-
         getFGOimg()
         setTimeout(() => {
-          // replyMsg = totalstr;
           event.reply({
             type: 'image',
             originalContentUrl: photo,
@@ -83,33 +81,36 @@ function _bot() {
           }).then((data) => { });
         }, 1000);
       }
-    
-
-      /*       event.reply({
-              type: 'image',
-              originalContentUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg',
-              previewImageUrl: 'https://pic1.zhimg.com/80/1f07a3a53308e972c68ee4c000cb72e8_hd.jpg'
-            }).then((data)=>{}); */
     }
   });
 
 }
 
 
+botFollw()
+function botFollw(){
 bot.on('follow',   function (event) { 
-  setInterval(()=>{
-    console.log(123);
+
+
+
+  event.reply('test').then(function (data) {
+    console.log('test');
+  })
+
+
+
+/*   setInterval(()=>{
   getFGOimg()
   setTimeout(() => {
-    // replyMsg = totalstr;
     event.reply({
       type: 'image',
       originalContentUrl: photo,
       previewImageUrl: photo
     }).then((data) => { });
   }, 1000);
-},5000)
+},5000) */
 });
+}
 
 
 
