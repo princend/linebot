@@ -86,7 +86,7 @@ function _bot() {
     }
 
     if (event.message.type == 'image') {
-      console.log(event.message, '輸入訊息')
+      console.log(event.message.content, '輸入訊息')
     }
   });
 
