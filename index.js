@@ -31,6 +31,7 @@ var server = app.listen(process.env.PORT || 8080, function () {
 
 function _bot() {
   bot.on('message', function (event) {
+    console.log(event.message, '輸入訊息')
     if (event.message.type == 'text') {
       var msg = event.message.text;
       var replyMsg = '';
@@ -82,6 +83,10 @@ function _bot() {
         }, 1000);
       }
 
+    }
+
+    if (event.message.type == 'image') {
+      console.log(event.message, '輸入訊息')
     }
   });
 
@@ -231,7 +236,7 @@ var sendOptions = {
   headers: { 'content-Type': 'application/json', 'Authorization': 'Bearer {NAq8fSKh+eKmAGR8iUqPmkLXAKI+mgjzi8pyCNyEktcxOfjfqCvlUQLzyLddcYsu3ql4eALNUt+ehby368gn1fjVGxuCTK1jRRIitof7Fc61rjepO662fZsvZpyZStfiU8RwSPIpEInUcvPEOFuZPwdB04t89/1O/w1cDnyilFU=}' },
   url: 'https://api.line.me/v2/bot/message/push',
   json: {
-    "to": "U88cd28005c1e4c187bd8bb50a4532bde", 
+    "to": "U88cd28005c1e4c187bd8bb50a4532bde",
     "messages": [{
       "type": "image",
       "originalContentUrl": "https://free.com.tw/blog/wp-content/uploads/2014/08/Placekitten480-g.jpg",
@@ -243,10 +248,10 @@ var sendOptions = {
 
 
 function autoSendMsg() {
-  getFGOimg(  
+  getFGOimg(
     setTimeout(() => {
-    request.post(sendOptions, (err) => { console.log('res', err); })
-  }, 2000)
+      request.post(sendOptions, (err) => { console.log('res', err); })
+    }, 2000)
   );
 }
 
