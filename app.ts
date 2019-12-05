@@ -71,8 +71,8 @@ export class Main {
             let weather = []
             this.totalstr = '';
             $('.FcstBoxTable01 tbody tr').each( (i, elem)=> {
-                console.log(i,elem,'elem~')
-                weather.push($().text().split('\n'));
+                // console.log(i,elem,'elem~')
+                weather.push($(elem).text().split('\n'));
             });
             let output = [];
             for (let i = 0; i < 3; i++) {

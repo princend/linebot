@@ -65,8 +65,8 @@ var Main = /** @class */ (function () {
             var weather = [];
             _this.totalstr = '';
             $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
-                console.log(i, elem, 'elem~');
-                weather.push($().text().split('\n'));
+                // console.log(i,elem,'elem~')
+                weather.push($(elem).text().split('\n'));
             });
             var output = [];
             for (var i = 0; i < 3; i++) {
