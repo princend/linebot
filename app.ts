@@ -42,7 +42,6 @@ export class Main {
         let replyMsg = ''
         const cb = () => setTimeout(() => {
             replyMsg = this.totalstr;
-            console.log('cbfn',replyMsg)
             event.reply(replyMsg).then((data) => {
                 console.log(replyMsg);
             }).catch((error) => {
@@ -69,8 +68,7 @@ export class Main {
             let $ = _cheerio.load(body);
             let weather = []
             this.totalstr = '';
-            $('.FcstBoxTable01 tbody tr').each( (i, elem)=> {
-                // console.log(i,elem,'elem~')
+            $('.FcstBoxTable01 tbody tr').each((i, elem) => {
                 weather.push($(elem).text().split('\n'));
             });
             let output = [];
@@ -81,9 +79,8 @@ export class Main {
                     rain: weather[i][6].substring(2)
                 });
             }
-            console.log(output,'output',weather,'天氣')
             output.forEach(data => {
-                this.totalstr += data.time; + '，溫度大約' + data.temp + '度，降雨機率 ' + data.rain + ';';
+                this.totalstr += data.time + '，溫度大約' + data.temp + '度，降雨機率 ' + data.rain + ';';
             })
             sendOptions.json.messages = []
             let sendObj = {
@@ -92,7 +89,6 @@ export class Main {
                 originalContentUrl: '',
                 previewImageUrl: ''
             }
-            console.log(this.totalstr,'asdasd');
             sendOptions.json.messages.push(sendObj);
             weatherCb()
         })
@@ -123,7 +119,7 @@ export class Image {
     getImgs(param) {
         param = JSON.parse(param);
         this.imgArray = []
-        param.data.forEach(element => {this.imgArray.push(element.link);});
+        param.data.forEach(element => { this.imgArray.push(element.link); });
         var ra = this.getRandom(this.imgArray.length)
         this.photo = this.imgArray[ra]
     }
@@ -133,5 +129,3 @@ export class Image {
 
 const main = new Main();
 main.bot();
-
-console.log('cc~')

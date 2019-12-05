@@ -37,7 +37,6 @@ var Main = /** @class */ (function () {
         var replyMsg = '';
         var cb = function () { return setTimeout(function () {
             replyMsg = _this.totalstr;
-            console.log('cbfn', replyMsg);
             event.reply(replyMsg).then(function (data) {
                 console.log(replyMsg);
             })["catch"](function (error) {
@@ -64,7 +63,6 @@ var Main = /** @class */ (function () {
             var weather = [];
             _this.totalstr = '';
             $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
-                // console.log(i,elem,'elem~')
                 weather.push($(elem).text().split('\n'));
             });
             var output = [];
@@ -75,10 +73,8 @@ var Main = /** @class */ (function () {
                     rain: weather[i][6].substring(2)
                 });
             }
-            console.log(output, 'output', weather, '天氣');
             output.forEach(function (data) {
-                _this.totalstr += data.time;
-                +'，溫度大約' + data.temp + '度，降雨機率 ' + data.rain + ';';
+                _this.totalstr += data.time + '，溫度大約' + data.temp + '度，降雨機率 ' + data.rain + ';';
             });
             model_1.sendOptions.json.messages = [];
             var sendObj = {
@@ -87,7 +83,6 @@ var Main = /** @class */ (function () {
                 originalContentUrl: '',
                 previewImageUrl: ''
             };
-            console.log(_this.totalstr, 'asdasd');
             model_1.sendOptions.json.messages.push(sendObj);
             weatherCb();
         });
@@ -128,4 +123,3 @@ var Image = /** @class */ (function () {
 exports.Image = Image;
 var main = new Main();
 main.bot();
-console.log('cc~');
