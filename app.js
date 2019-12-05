@@ -61,7 +61,6 @@ var Main = /** @class */ (function () {
         var _this = this;
         request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {
             var $ = _cheerio.load(body);
-            console.log($);
             var weather = [];
             _this.totalstr = '';
             $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
@@ -76,6 +75,7 @@ var Main = /** @class */ (function () {
                     rain: weather[i][6].substring(2)
                 });
             }
+            console.log(output, 'output', weather, '天氣');
             output.forEach(function (data) {
                 _this.totalstr += data.time;
                 +'，溫度大約' + data.temp + '度，降雨機率 ' + data.rain + ';';

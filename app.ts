@@ -67,7 +67,6 @@ export class Main {
     getWeather(weatherCb) {
         request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', (err, res, body) => {
             let $ = _cheerio.load(body);
-            console.log($)
             let weather = []
             this.totalstr = '';
             $('.FcstBoxTable01 tbody tr').each( (i, elem)=> {
@@ -82,6 +81,7 @@ export class Main {
                     rain: weather[i][6].substring(2)
                 });
             }
+            console.log(output,'output',weather,'天氣')
             output.forEach(data => {
                 this.totalstr += data.time; + '，溫度大約' + data.temp + '度，降雨機率 ' + data.rain + ';';
             })
