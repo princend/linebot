@@ -61,10 +61,12 @@ var Main = /** @class */ (function () {
         var _this = this;
         request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {
             var $ = _cheerio.load(body);
+            console.log($);
             var weather = [];
             _this.totalstr = '';
             $('.FcstBoxTable01 tbody tr').each(function (i, elem) {
-                weather.push($(_this).text().split('\n'));
+                console.log(i, elem, 'elem~');
+                weather.push($().text().split('\n'));
             });
             var output = [];
             for (var i = 0; i < 3; i++) {
@@ -126,3 +128,4 @@ var Image = /** @class */ (function () {
 exports.Image = Image;
 var main = new Main();
 main.bot();
+console.log('cc~');
