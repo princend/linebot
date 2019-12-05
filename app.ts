@@ -67,9 +67,11 @@ export class Main {
     getWeather(weatherCb) {
         request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', (err, res, body) => {
             let $ = _cheerio.load(body);
+            console.log($)
             let weather = []
             this.totalstr = '';
             $('.FcstBoxTable01 tbody tr').each( (i, elem)=> {
+                console.log(i,elem,'elem~')
                 weather.push($().text().split('\n'));
             });
             let output = [];
