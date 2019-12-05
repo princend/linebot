@@ -42,6 +42,7 @@ export class Main {
         let replyMsg = ''
         const cb = () => setTimeout(() => {
             replyMsg = this.totalstr;
+            console.log('cbfn',replyMsg)
             event.reply(replyMsg).then((data) => {
                 console.log(replyMsg);
             }).catch((error) => {
@@ -63,7 +64,7 @@ export class Main {
     }
 
 
-    getWeather(cb) {
+    getWeather(weatherCb) {
         request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', (err, res, body) => {
             let $ = _cheerio.load(body);
             let weather = []
@@ -89,8 +90,9 @@ export class Main {
                 originalContentUrl: '',
                 previewImageUrl: ''
             }
+            console.log(this.totalstr,'asdasd');
             sendOptions.json.messages.push(sendObj);
-            cb()
+            weatherCb()
         })
     }
 

@@ -37,6 +37,7 @@ var Main = /** @class */ (function () {
         var replyMsg = '';
         var cb = function () { return setTimeout(function () {
             replyMsg = _this.totalstr;
+            console.log('cbfn', replyMsg);
             event.reply(replyMsg).then(function (data) {
                 console.log(replyMsg);
             })["catch"](function (error) {
@@ -56,7 +57,7 @@ var Main = /** @class */ (function () {
         }); };
         this.imageGetter.getFGOimg(photoCb);
     };
-    Main.prototype.getWeather = function (cb) {
+    Main.prototype.getWeather = function (weatherCb) {
         var _this = this;
         request('http://www.cwb.gov.tw/V7/forecast/taiwan/Taichung_City.htm', function (err, res, body) {
             var $ = _cheerio.load(body);
@@ -84,8 +85,9 @@ var Main = /** @class */ (function () {
                 originalContentUrl: '',
                 previewImageUrl: ''
             };
+            console.log(_this.totalstr, 'asdasd');
             model_1.sendOptions.json.messages.push(sendObj);
-            cb();
+            weatherCb();
         });
     };
     return Main;
