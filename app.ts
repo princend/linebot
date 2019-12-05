@@ -131,3 +131,5 @@ export class Image {
 
 const main = new Main();
 main.bot();
+
+console.log('cc~')
